@@ -1,3 +1,61 @@
+# from flask import Flask, request, jsonify
+# import os
+# import re
+# from dotenv import load_dotenv
+# from together import Together
+
+# # Initialize Flask app
+# app = Flask(__name__)
+
+# # Load environment variables from .env file
+# load_dotenv()
+
+# # Get API key from environment variable
+# TOGETHER_AI_API_KEY = os.getenv("TOGETHER_API_KEY")
+# if not TOGETHER_AI_API_KEY:
+#     raise ValueError("API key is not set in the environment variables.")
+
+# # Initialize Together client
+# client = Together(api_key=TOGETHER_AI_API_KEY)
+
+# def generate_response(prompt):
+#     try:
+#         response = client.chat.completions.create(
+#             model="codellama/CodeLlama-34b-Python-hf",
+#             messages=[{"role": "user", "content": prompt}],
+#             max_tokens=175
+#         )
+#         # Print the entire response object for debugging
+#         print(f"Response: {response}")
+
+#         # Extract the response content
+#         content = response.choices[0].message.content
+        
+#         # Clean the response content using regular expressions
+#         # Remove instructional tags and extra whitespace
+#         cleaned_content = re.sub(r'\[INST\]|\[/INST\]', '', content)  # Remove instructional tags
+#         cleaned_content = re.sub(r'\s+', ' ', cleaned_content)  # Replace multiple newlines with a single space
+#         cleaned_content = cleaned_content.strip()  # Remove leading and trailing whitespace
+        
+#         return cleaned_content
+#     except Exception as e:
+#         print(f"Error: {e}")  # Log the error for debugging
+#         return "Sorry, there was an error processing your request."
+
+# @app.route('/chat', methods=['POST'])
+# def chat():
+#     user_input = request.json.get('message', '')
+#     if not user_input:
+#         return jsonify({'error': 'No message provided'}), 400
+
+#     response_text = generate_response(user_input)
+#     return jsonify({'response': response_text})
+
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
+
+
 from flask import Flask, request, jsonify
 import os
 from dotenv import load_dotenv
